@@ -22,6 +22,7 @@
 		66FBD11A19365CFC0056BA99 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 66FBD11819365CFC0056BA99 /* InfoPlist.strings */; };
 		66FBD11C19365CFC0056BA99 /* GetOnThatBusTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 66FBD11B19365CFC0056BA99 /* GetOnThatBusTests.m */; };
 		66FBD1261936608F0056BA99 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 66FBD1251936608F0056BA99 /* MapKit.framework */; };
+		931B3D2719366DE500DE5063 /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 931B3D2619366DE500DE5063 /* DetailViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,6 +56,8 @@
 		66FBD11919365CFC0056BA99 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		66FBD11B19365CFC0056BA99 /* GetOnThatBusTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GetOnThatBusTests.m; sourceTree = "<group>"; };
 		66FBD1251936608F0056BA99 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		931B3D2519366DE500DE5063 /* DetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailViewController.h; sourceTree = "<group>"; };
+		931B3D2619366DE500DE5063 /* DetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -119,6 +122,8 @@
 				66FBD0FF19365CFC0056BA99 /* AppDelegate.h */,
 				66FBD10019365CFC0056BA99 /* AppDelegate.m */,
 				66FBD10219365CFC0056BA99 /* Main.storyboard */,
+				931B3D2519366DE500DE5063 /* DetailViewController.h */,
+				931B3D2619366DE500DE5063 /* DetailViewController.m */,
 				66FBD10519365CFC0056BA99 /* ViewController.h */,
 				66FBD10619365CFC0056BA99 /* ViewController.m */,
 				66FBD10819365CFC0056BA99 /* Images.xcassets */,
@@ -255,6 +260,7 @@
 				66FBD10719365CFC0056BA99 /* ViewController.m in Sources */,
 				66FBD10119365CFC0056BA99 /* AppDelegate.m in Sources */,
 				66FBD0FD19365CFC0056BA99 /* main.m in Sources */,
+				931B3D2719366DE500DE5063 /* DetailViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -459,6 +465,7 @@
 				66FBD12119365CFC0056BA99 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		66FBD12219365CFC0056BA99 /* Build configuration list for PBXNativeTarget "GetOnThatBusTests" */ = {
 			isa = XCConfigurationList;
@@ -467,6 +474,7 @@
 				66FBD12419365CFC0056BA99 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
