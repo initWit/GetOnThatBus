@@ -9,5 +9,5 @@
 #import <MapKit/MapKit.h>
 
 @interface PaceAnnotation : MKPointAnnotation
-
+@property int index;
 @end

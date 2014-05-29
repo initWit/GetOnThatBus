@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6665951919375AAC00FE444C /* NoTransferAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 6665951819375AAC00FE444C /* NoTransferAnnotation.m */; };
 		66E679DC1936B47D00B3E71C /* PaceAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 66E679DB1936B47D00B3E71C /* PaceAnnotation.m */; };
 		66E679DF1936B61100B3E71C /* MetraAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 66E679DE1936B61100B3E71C /* MetraAnnotation.m */; };
 		66FBD0F119365CFC0056BA99 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 66FBD0F019365CFC0056BA99 /* Foundation.framework */; };
@@ -38,6 +39,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		6665951719375AAC00FE444C /* NoTransferAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NoTransferAnnotation.h; sourceTree = "<group>"; };
+		6665951819375AAC00FE444C /* NoTransferAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NoTransferAnnotation.m; sourceTree = "<group>"; };
 		66E679DA1936B47D00B3E71C /* PaceAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PaceAnnotation.h; sourceTree = "<group>"; };
 		66E679DB1936B47D00B3E71C /* PaceAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PaceAnnotation.m; sourceTree = "<group>"; };
 		66E679DD1936B61100B3E71C /* MetraAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MetraAnnotation.h; sourceTree = "<group>"; };
@@ -132,6 +135,8 @@
 				931B3D2619366DE500DE5063 /* DetailViewController.m */,
 				66FBD10519365CFC0056BA99 /* ViewController.h */,
 				66FBD10619365CFC0056BA99 /* ViewController.m */,
+				6665951719375AAC00FE444C /* NoTransferAnnotation.h */,
+				6665951819375AAC00FE444C /* NoTransferAnnotation.m */,
 				66E679DD1936B61100B3E71C /* MetraAnnotation.h */,
 				66E679DE1936B61100B3E71C /* MetraAnnotation.m */,
 				66E679DA1936B47D00B3E71C /* PaceAnnotation.h */,
@@ -273,6 +278,7 @@
 				66FBD0FD19365CFC0056BA99 /* main.m in Sources */,
 				66E679DC1936B47D00B3E71C /* PaceAnnotation.m in Sources */,
 				931B3D2719366DE500DE5063 /* DetailViewController.m in Sources */,
+				6665951919375AAC00FE444C /* NoTransferAnnotation.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

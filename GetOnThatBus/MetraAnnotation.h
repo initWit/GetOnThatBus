@@ -9,5 +9,5 @@
 #import <MapKit/MapKit.h>
 
 @interface MetraAnnotation : MKPointAnnotation
-
+@property int index;
 @end

@@ -9,5 +9,4 @@
 #import "MetraAnnotation.h"
 
 @implementation MetraAnnotation
-
 @end
