@@ -11,19 +11,17 @@
 #import "DetailViewController.h"
 #import "PaceAnnotation.h"
 #import "MetraAnnotation.h"
-
+#import "NoTransferAnnotation.h"
 
 @interface ViewController () <MKMapViewDelegate>
 @property (strong, nonatomic) IBOutlet MKMapView *mapView;
 @property NSArray *busStopsArray;
 @property NSDictionary *selectedDictionary;
-//@property MKPinAnnotationView *pin;
 @property PaceAnnotation *paceAnnotation;
 @property MetraAnnotation *metraAnnotation;
-@property MKPointAnnotation *noTransferAnnotation;
-
-
+@property NoTransferAnnotation *noTransferAnnotation;
 @end
+
 
 @implementation ViewController
 
@@ -46,9 +44,7 @@
             NSString *longitude = [busDictionary objectForKey:@"longitude"];
             double latConvertedToDouble = [latitude doubleValue];
             double longConvertedToDouble = [longitude doubleValue];
-
             NSString *transferMode = [busDictionary objectForKey:@"inter_modal"];
-
 
             if ([transferMode isEqualToString:@"Pace"])
             {
@@ -56,6 +52,7 @@
                 self.paceAnnotation.coordinate = CLLocationCoordinate2DMake(latConvertedToDouble, longConvertedToDouble);
                 self.paceAnnotation.title = [busDictionary objectForKey:@"cta_stop_name"];
                 self.paceAnnotation.subtitle = [busDictionary objectForKey:@"routes"];
+                self.paceAnnotation.index = [self.busStopsArray indexOfObject:busDictionary];
                 [self.mapView addAnnotation:self.paceAnnotation];
 
             }
@@ -65,17 +62,17 @@
                 self.metraAnnotation.coordinate = CLLocationCoordinate2DMake(latConvertedToDouble, longConvertedToDouble);
                 self.metraAnnotation.title = [busDictionary objectForKey:@"cta_stop_name"];
                 self.metraAnnotation.subtitle = [busDictionary objectForKey:@"routes"];
+                self.metraAnnotation.index = [self.busStopsArray indexOfObject:busDictionary];
                 [self.mapView addAnnotation:self.metraAnnotation];
-
             }
             else
             {
-                self.noTransferAnnotation = [[MKPointAnnotation alloc]init];
+                self.noTransferAnnotation = [[NoTransferAnnotation alloc]init];
                 self.noTransferAnnotation.coordinate = CLLocationCoordinate2DMake(latConvertedToDouble, longConvertedToDouble);
                 self.noTransferAnnotation.title = [busDictionary objectForKey:@"cta_stop_name"];
                 self.noTransferAnnotation.subtitle = [busDictionary objectForKey:@"routes"];
+                self.noTransferAnnotation.index = [self.busStopsArray indexOfObject:busDictionary];
                 [self.mapView addAnnotation:self.noTransferAnnotation];
-
             }
         }
 
@@ -85,28 +82,28 @@
         MKCoordinateRegion region = MKCoordinateRegionMake(centerCoordinate, span);
         [self.mapView setRegion:region];
     }];
-
 }
 
 
 #pragma mark - AnnotationView Delegate Methods
 
+
 - (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation
 {
-
     MKPinAnnotationView* pin = [[MKPinAnnotationView alloc]initWithAnnotation:annotation reuseIdentifier:nil];
     pin.canShowCallout = YES;
     [pin rightCalloutAccessoryView];
     pin.rightCalloutAccessoryView = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
 
-    if ([annotation isKindOfClass:[PaceAnnotation class]]) {
+    if ([annotation isKindOfClass:[PaceAnnotation class]])
+    {
         pin.image = [UIImage imageNamed:@"pace"];
     }
 
-    else if ([annotation isKindOfClass:[MetraAnnotation class]]) {
+    else if ([annotation isKindOfClass:[MetraAnnotation class]])
+    {
         pin.image = [UIImage imageNamed:@"metra"];
     }
-
     return pin;
 }
 
@@ -115,22 +112,50 @@
 {
     // Identifies selected pins and adds it to array
     NSArray *selectedAnnotations = [[NSArray alloc]initWithArray:[self.mapView selectedAnnotations]];
-    MKPointAnnotation *selectedPin = [selectedAnnotations objectAtIndex:0];
-    for(NSDictionary *eachDictionary in self.busStopsArray)
+
+    if ([[selectedAnnotations objectAtIndex:0] isKindOfClass:[PaceAnnotation class]])
     {
-        // Finds the selected bus stop in the array of dictionaries by matching the name
-        if([eachDictionary[@"cta_stop_name"] isEqualToString:selectedPin.title])
+        PaceAnnotation *selectedPin = [selectedAnnotations objectAtIndex:0];
+        for(NSDictionary *eachDictionary in self.busStopsArray)
         {
-            self.selectedDictionary = eachDictionary;
+            if (selectedPin.index == [self.busStopsArray indexOfObject:eachDictionary])
+            {
+                self.selectedDictionary = eachDictionary;
+            }
         }
     }
+    else if ([[selectedAnnotations objectAtIndex:0] isKindOfClass:[MetraAnnotation class]])
+    {
+        MetraAnnotation *selectedPin = [selectedAnnotations objectAtIndex:0];
+        for(NSDictionary *eachDictionary in self.busStopsArray)
+        {
+            if (selectedPin.index == [self.busStopsArray indexOfObject:eachDictionary])
+            {
+                self.selectedDictionary = eachDictionary;
+            }
+        }
+    }
+    else
+    {
+        NoTransferAnnotation *selectedPin = [selectedAnnotations objectAtIndex:0];
+        for(NSDictionary *eachDictionary in self.busStopsArray)
+        {
+            if (selectedPin.index == [self.busStopsArray indexOfObject:eachDictionary])
+            {
+                self.selectedDictionary = eachDictionary;
+            }
+        }
+    }
+
     [self performSegueWithIdentifier:@"DetailSegue" sender:self];
 }
+
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     DetailViewController *detailVC = [segue destinationViewController];
     detailVC.selectedBusStopDictionary = self.selectedDictionary;
 }
+
 
 @end

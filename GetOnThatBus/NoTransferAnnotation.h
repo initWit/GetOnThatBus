@@ -9,5 +9,5 @@
 #import <MapKit/MapKit.h>
 
 @interface NoTransferAnnotation : MKPointAnnotation
-
+@property int index;
 @end
