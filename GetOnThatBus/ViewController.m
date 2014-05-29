@@ -9,12 +9,19 @@
 #import "ViewController.h"
 #import <MapKit/MapKit.h>
 #import "DetailViewController.h"
+#import "PaceAnnotation.h"
+#import "MetraAnnotation.h"
 
 
 @interface ViewController () <MKMapViewDelegate>
 @property (strong, nonatomic) IBOutlet MKMapView *mapView;
 @property NSArray *busStopsArray;
 @property NSDictionary *selectedDictionary;
+//@property MKPinAnnotationView *pin;
+@property PaceAnnotation *paceAnnotation;
+@property MetraAnnotation *metraAnnotation;
+@property MKPointAnnotation *noTransferAnnotation;
+
 
 @end
 
@@ -34,52 +41,43 @@
         NSDictionary *amazonDictionary = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:&connectionError];
         self.busStopsArray = [amazonDictionary objectForKey:@"row"];
 
-        // Zoom-set variables
-//        double maxLongitudeNorth = 0.0;
-//        double maxLongitudeSouth = 0.0;
-//        double maxLatitudeEast = 0.0;
-//        double maxLatitudeWest = 50.0;
-
         for (NSDictionary *busDictionary in self.busStopsArray) {
             NSString *latitude = [busDictionary objectForKey:@"latitude"];
             NSString *longitude = [busDictionary objectForKey:@"longitude"];
-
             double latConvertedToDouble = [latitude doubleValue];
             double longConvertedToDouble = [longitude doubleValue];
-            MKPointAnnotation *busStopAnnotation = [[MKPointAnnotation alloc]init];
-            busStopAnnotation.coordinate = CLLocationCoordinate2DMake(latConvertedToDouble, longConvertedToDouble);
-            busStopAnnotation.title = [busDictionary objectForKey:@"cta_stop_name"];
-            busStopAnnotation.subtitle = [busDictionary objectForKey:@"routes"];
 
-            [self.mapView addAnnotation:busStopAnnotation];
+            NSString *transferMode = [busDictionary objectForKey:@"inter_modal"];
 
-//            // Setting initial zoom boundaries
-//            // Set East boundary
-//            if(latConvertedToDouble > maxLatitudeEast)
-//            {
-//                maxLatitudeEast = latConvertedToDouble;
-//            }
-//            // Set West boundary
-//            if(latConvertedToDouble < maxLatitudeWest)
-//            {
-//                maxLatitudeWest = latConvertedToDouble;
-//            }
-//            // Set North boundary
-//            if(longConvertedToDouble < maxLongitudeNorth)
-//            {
-//                maxLongitudeNorth = longConvertedToDouble;
-//            }
-//            // Set South boundary
-//            if(longConvertedToDouble > maxLongitudeSouth)
-//            {
-//                maxLongitudeSouth = longConvertedToDouble;
-//            }
+
+            if ([transferMode isEqualToString:@"Pace"])
+            {
+                self.paceAnnotation = [[PaceAnnotation alloc]init];
+                self.paceAnnotation.coordinate = CLLocationCoordinate2DMake(latConvertedToDouble, longConvertedToDouble);
+                self.paceAnnotation.title = [busDictionary objectForKey:@"cta_stop_name"];
+                self.paceAnnotation.subtitle = [busDictionary objectForKey:@"routes"];
+                [self.mapView addAnnotation:self.paceAnnotation];
+
+            }
+            else if ([transferMode isEqualToString:@"Metra"])
+            {
+                self.metraAnnotation = [[MetraAnnotation alloc]init];
+                self.metraAnnotation.coordinate = CLLocationCoordinate2DMake(latConvertedToDouble, longConvertedToDouble);
+                self.metraAnnotation.title = [busDictionary objectForKey:@"cta_stop_name"];
+                self.metraAnnotation.subtitle = [busDictionary objectForKey:@"routes"];
+                [self.mapView addAnnotation:self.metraAnnotation];
+
+            }
+            else
+            {
+                self.noTransferAnnotation = [[MKPointAnnotation alloc]init];
+                self.noTransferAnnotation.coordinate = CLLocationCoordinate2DMake(latConvertedToDouble, longConvertedToDouble);
+                self.noTransferAnnotation.title = [busDictionary objectForKey:@"cta_stop_name"];
+                self.noTransferAnnotation.subtitle = [busDictionary objectForKey:@"routes"];
+                [self.mapView addAnnotation:self.noTransferAnnotation];
+
+            }
         }
-
-        // Calculate center coordinates
-//        double centerCoordinateY = (maxLongitudeSouth + ((maxLongitudeNorth - maxLongitudeSouth) / 2));
-//        double centerCoordinateX = (maxLatitudeEast + ((maxLatitudeWest - maxLatitudeEast) / 2));
-//        NSLog(@"CENTER Y: %d CENTER X: %d", centerCoordinateY, centerCoordinateX);
 
         // Set initial zoom
         CLLocationCoordinate2D centerCoordinate = CLLocationCoordinate2DMake(41.84, -87.70);
@@ -87,16 +85,28 @@
         MKCoordinateRegion region = MKCoordinateRegionMake(centerCoordinate, span);
         [self.mapView setRegion:region];
     }];
+
 }
+
 
 #pragma mark - AnnotationView Delegate Methods
 
 - (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation
 {
-    MKPinAnnotationView *pin = [[MKPinAnnotationView alloc]initWithAnnotation:annotation reuseIdentifier:nil];
+
+    MKPinAnnotationView* pin = [[MKPinAnnotationView alloc]initWithAnnotation:annotation reuseIdentifier:nil];
     pin.canShowCallout = YES;
     [pin rightCalloutAccessoryView];
     pin.rightCalloutAccessoryView = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
+
+    if ([annotation isKindOfClass:[PaceAnnotation class]]) {
+        pin.image = [UIImage imageNamed:@"pace"];
+    }
+
+    else if ([annotation isKindOfClass:[MetraAnnotation class]]) {
+        pin.image = [UIImage imageNamed:@"metra"];
+    }
+
     return pin;
 }
 
@@ -112,7 +122,6 @@
         if([eachDictionary[@"cta_stop_name"] isEqualToString:selectedPin.title])
         {
             self.selectedDictionary = eachDictionary;
-            NSLog(@"%@",self.selectedDictionary);
         }
     }
     [self performSegueWithIdentifier:@"DetailSegue" sender:self];

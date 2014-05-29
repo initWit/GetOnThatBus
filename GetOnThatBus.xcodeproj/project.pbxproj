@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		66E679DC1936B47D00B3E71C /* PaceAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 66E679DB1936B47D00B3E71C /* PaceAnnotation.m */; };
+		66E679DF1936B61100B3E71C /* MetraAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 66E679DE1936B61100B3E71C /* MetraAnnotation.m */; };
 		66FBD0F119365CFC0056BA99 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 66FBD0F019365CFC0056BA99 /* Foundation.framework */; };
 		66FBD0F319365CFC0056BA99 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 66FBD0F219365CFC0056BA99 /* CoreGraphics.framework */; };
 		66FBD0F519365CFC0056BA99 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 66FBD0F419365CFC0056BA99 /* UIKit.framework */; };
@@ -36,6 +38,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		66E679DA1936B47D00B3E71C /* PaceAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PaceAnnotation.h; sourceTree = "<group>"; };
+		66E679DB1936B47D00B3E71C /* PaceAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PaceAnnotation.m; sourceTree = "<group>"; };
+		66E679DD1936B61100B3E71C /* MetraAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MetraAnnotation.h; sourceTree = "<group>"; };
+		66E679DE1936B61100B3E71C /* MetraAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MetraAnnotation.m; sourceTree = "<group>"; };
 		66FBD0ED19365CFC0056BA99 /* GetOnThatBus.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GetOnThatBus.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		66FBD0F019365CFC0056BA99 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		66FBD0F219365CFC0056BA99 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -126,6 +132,10 @@
 				931B3D2619366DE500DE5063 /* DetailViewController.m */,
 				66FBD10519365CFC0056BA99 /* ViewController.h */,
 				66FBD10619365CFC0056BA99 /* ViewController.m */,
+				66E679DD1936B61100B3E71C /* MetraAnnotation.h */,
+				66E679DE1936B61100B3E71C /* MetraAnnotation.m */,
+				66E679DA1936B47D00B3E71C /* PaceAnnotation.h */,
+				66E679DB1936B47D00B3E71C /* PaceAnnotation.m */,
 				66FBD10819365CFC0056BA99 /* Images.xcassets */,
 				66FBD0F719365CFC0056BA99 /* Supporting Files */,
 			);
@@ -259,7 +269,9 @@
 			files = (
 				66FBD10719365CFC0056BA99 /* ViewController.m in Sources */,
 				66FBD10119365CFC0056BA99 /* AppDelegate.m in Sources */,
+				66E679DF1936B61100B3E71C /* MetraAnnotation.m in Sources */,
 				66FBD0FD19365CFC0056BA99 /* main.m in Sources */,
+				66E679DC1936B47D00B3E71C /* PaceAnnotation.m in Sources */,
 				931B3D2719366DE500DE5063 /* DetailViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
