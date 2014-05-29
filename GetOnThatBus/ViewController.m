@@ -44,6 +44,12 @@
             NSString *longitude = [busDictionary objectForKey:@"longitude"];
             double latConvertedToDouble = [latitude doubleValue];
             double longConvertedToDouble = [longitude doubleValue];
+
+            if (longConvertedToDouble > 0) {
+                longConvertedToDouble = -longConvertedToDouble;
+            }
+
+
             NSString *transferMode = [busDictionary objectForKey:@"inter_modal"];
 
             if ([transferMode isEqualToString:@"Pace"])
